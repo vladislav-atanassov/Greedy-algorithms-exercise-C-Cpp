@@ -1,7 +1,8 @@
 #ifndef HUFFMANSCODING_H
 #define HUFFMANSCODING_H
 
-#define MAX_CODE_LENGTH 100
+#define MAX_CODE_LENGTH SCHAR_MAX
+#define NULL_CHAR '\0'
 
 // Node structure for the Huffman tree
 struct Node 

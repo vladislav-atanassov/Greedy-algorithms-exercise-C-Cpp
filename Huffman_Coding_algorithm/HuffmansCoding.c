@@ -80,7 +80,7 @@ void push(struct PriorityQueue* priorityQueue, struct Node* node)
 
 struct Node* pop(struct PriorityQueue* priorityQueue) 
 {
-    if(priorityQueue->front == NULL) 
+    if(!priorityQueue->front) 
     {
         return NULL;
     }
@@ -110,7 +110,7 @@ struct Node* buildHuffmanTree(char data[], int frequency[], int size_of_data)
         left = pop(priorityQueue);
         right = pop(priorityQueue);
 
-        top = createNode('\0', left->frequency + right->frequency); // Use a different character, like '\0'
+        top = createNode(NULL_CHAR, left->frequency + right->frequency); 
         top->left = left;
         top->right = right;
 
@@ -122,7 +122,7 @@ struct Node* buildHuffmanTree(char data[], int frequency[], int size_of_data)
 
 void encode(struct Node* root, char str[], int top, char data[], char huffmanCodes[][MAX_CODE_LENGTH]) 
 {
-    if(root == NULL)
+    if(!root)
     {
         return;
     }
@@ -130,7 +130,7 @@ void encode(struct Node* root, char str[], int top, char data[], char huffmanCod
     // If the node is a leaf node, it contains a character
     if(root->left == NULL && root->right == NULL) 
     {
-        data[top] = '\0';
+        data[top] = NULL_CHAR;
         strcpy(huffmanCodes[(int)root->data], str);
         return;
     }
@@ -150,18 +150,18 @@ void decode(struct Node* root, char encodedStr[])
     struct Node* current = root;
 
     printf("Decoded String: ");
-    for (int i = 0; encodedStr[i] != '\0'; ++i) 
+    for(int i = 0; encodedStr[i] != NULL_CHAR; ++i) 
     {
-        if (encodedStr[i] == '0' && current->left != NULL) 
+        if(encodedStr[i] == '0' && current->left != NULL) 
         {
             current = current->left;
         } 
-        else if (encodedStr[i] == '1' && current->right != NULL) 
+        else if(encodedStr[i] == '1' && current->right != NULL) 
         {
             current = current->right;
         }
 
-        if (current->left == NULL && current->right == NULL) 
+        if(current->left == NULL && current->right == NULL) 
         {
             printf("%c", current->data);
             current = root; // Reset to the root for the next character
@@ -173,9 +173,9 @@ void decode(struct Node* root, char encodedStr[])
 
 void freeTree(struct Node* root) 
 {
-    if(root == NULL) 
+    if(!root) 
     {
-        return;
+        return; 
     }
 
     freeTree(root->left);

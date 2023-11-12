@@ -22,7 +22,7 @@ int main()
     {
         int index = (int)data[i]; // Convert character to integer for array index
         printf("%c : %s\n", data[i], 
-                huffmanCodes[index][0] == '\0' ? "Not Found" : huffmanCodes[index]);
+                huffmanCodes[index][0] == NULL_CHAR ? "Not Found" : huffmanCodes[index]);
     }
 
     // Example of decoding a string

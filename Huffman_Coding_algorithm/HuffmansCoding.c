@@ -24,18 +24,18 @@ struct Node* createNode(char data, int frequency)
 
 struct PriorityQueueNode* createPriorityQueueNode(struct Node* node) 
 {
-    struct PriorityQueueNode* newNode = (struct PriorityQueueNode*)malloc(sizeof(struct PriorityQueueNode));
+    struct PriorityQueueNode* newQueue = (struct PriorityQueueNode*)malloc(sizeof(struct PriorityQueueNode));
 
-    if(!newNode)
+    if(!newQueue)
     {
         perror("Memory allocation failed!");
         exit(1);
     }
 
-    newNode->node = node;
-    newNode->next = NULL;
+    newQueue->node = node;
+    newQueue->next = NULL;
 
-    return newNode;
+    return newQueue;
 }
 
 struct PriorityQueue* createPriorityQueue() 

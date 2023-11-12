@@ -54,7 +54,7 @@ int coinChangeProblem(int coins[], const int size, int wantedNumber)
 int main()
 {
     int coins[5] = {1, 7, 4, 5, 3};
-    int wantedNumber = 13;
+    int wantedNumber = 16;
 
     printf("The minimum number of coins the used (with Greedy approach) is: %d", 
             coinChangeProblem(coins, 5, wantedNumber));    // Expected: 4 [7, 7, 1, 1]

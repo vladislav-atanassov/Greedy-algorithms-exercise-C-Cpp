@@ -1,6 +1,8 @@
 #ifndef HUFFMANSCODING_H
 #define HUFFMANSCODING_H
 
+#include <limits.h>
+
 #define MAX_CODE_LENGTH SCHAR_MAX
 #define NULL_CHAR '\0'
 

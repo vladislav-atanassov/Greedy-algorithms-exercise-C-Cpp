@@ -12,6 +12,15 @@ PriorityQueueEdge* createPriorityQueueEdge(int weight, char* name)
         perror("Memory allocation failed!");
         exit(1);
     }
+    
+    // Allocate memory for the Edge structure
+    newEdge->edge = (Edge*)malloc(sizeof(Edge)); 
+
+    if(!newEdge->edge)
+    {
+        perror("Memory allocation failed!");
+        exit(1);
+    }
 
     newEdge->edge->weight = weight;
     newEdge->edge->name = name;
@@ -19,6 +28,7 @@ PriorityQueueEdge* createPriorityQueueEdge(int weight, char* name)
 
     return newEdge;
 }
+
 
 PriorityQueue* createPriorityQueue(Edge* edge)
 {
@@ -30,8 +40,118 @@ PriorityQueue* createPriorityQueue(Edge* edge)
         exit(1);
     }
 
-    newQueue->front->edge = edge;
-    newQueue->front->next = NULL;
+    newQueue->front = createPriorityQueueEdge(edge->weight, edge->name); // Initialize front node
 
     return newQueue;
+}
+
+
+int minDistance(Graph* graph, bool visited[], int dist[])
+{
+    int min = INFINITY;
+	int min_index, i;
+
+    for(i = 0; i < graph->vertices; i++) 
+    {
+        // If the node is not visited and the current distance
+        // is shorter assign it to the new value
+        if((!visited[i]) && (dist[i] <= min)) 
+        {
+            min = dist[i];
+            min_index = i; // Get the index of the current nearest node
+        }
+    }
+
+    return min_index;
+}
+
+void primsAlgorithm(Graph* graph, int source)
+{
+    bool visited[graph->vertices];  // Keeps track of that if the node has been visited or not (0, 1)
+    int dist[graph->vertices];      // Keeps the current distances to each point and updates if found shorter path
+
+    // Assigning all the edges as default
+    for(int i = 0; i < graph->vertices; i++) 
+    {
+        dist[i] = INFINITY;
+        visited[i] = false;
+    }
+
+    // The distance to the source edge is always 0
+    dist[source] = 0;
+
+    for(int count = 0; count < graph->vertices - 1; count++) 
+    {
+        // Pick the minimum distance vertex from the set of vertices not yet processed.
+        int minDist = minDistance(graph, visited, dist);
+
+        // Mark the picked vertex as processed
+        visited[minDist] = true;
+
+        // Update the distance value of the neighboring vertices of the picked vertex.
+        for(int i = 0; i < graph->vertices; i++)
+        {
+            if(!visited[i] && 
+                graph->matrix[minDist][i].weight && 
+                graph->matrix[minDist][i].weight < dist[i])
+            {
+                dist[i] = graph->matrix[minDist][i].weight;
+            }
+        }
+    }
+
+    for(int i = 0; i < graph->vertices; i++)
+    {
+        printf("%d ", dist[i]);
+    }
+}
+
+// Function that inserts a node into the graph
+// The function takes five arguments:
+void addEdge(Graph* graph, int position_x, int position_y, char* name, int weight)
+{
+    // Assignning the weight of the node in the graph
+    graph->matrix[position_x][position_y].weight = weight;
+    graph->matrix[position_y][position_x].weight = weight;
+    
+    // Assigning the name of the node in the graph
+    graph->matrix[position_x][position_y].name = name;
+    graph->matrix[position_y][position_x].name = name;
+}
+
+Graph* initializeGraph(int vertices)
+{
+    Graph* graph = (Graph*)malloc(sizeof(Graph));
+
+    // Allocate memory for the graph
+    graph->matrix = (Edge**)malloc((size_t)vertices * sizeof(Edge*));
+    for (int i = 0; i < vertices; i++) 
+    {
+        graph->matrix[i] = (Edge*)malloc((size_t)vertices * sizeof(Edge));
+    }
+
+    graph->vertices = vertices;
+
+    // Initialize the graph with default values
+    for (int i = 0; i < vertices; i++) 
+    {
+        for (int j = 0; j < vertices; j++) 
+        {
+            graph->matrix[i][j].weight = 0;
+            graph->matrix[i][j].name = NULL;
+        }
+    }
+
+    return graph;
+}
+
+void freeGraph(Graph* graph)
+{
+    for(int i = 0; i < graph->vertices; i++) 
+    {
+        free(graph->matrix[i]);
+    }
+
+    free(graph->matrix);
+    free(graph);    
 }

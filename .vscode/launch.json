@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Vladislav Atanassov/Documents/Greedy-algorithms-exercise/Prim_algorithm",
-      "program": "c:/Users/Vladislav Atanassov/Documents/Greedy-algorithms-exercise/Prim_algorithm/build/Debug/outDebug",
+      "cwd": "c:/Users/Vladislav Atanassov/Documents/Greedy-algorithms-exercise",
+      "program": "c:/Users/Vladislav Atanassov/Documents/Greedy-algorithms-exercise/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

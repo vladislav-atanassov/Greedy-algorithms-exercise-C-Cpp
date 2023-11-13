@@ -91,7 +91,7 @@ void primsAlgorithm(Graph* graph, int source)
         // Update the distance value of the neighboring vertices of the picked vertex.
         for(int i = 0; i < graph->vertices; i++)
         {
-            if(!visited[i] && 
+            if (!visited[i] && 
                 graph->matrix[minDist][i].weight && 
                 graph->matrix[minDist][i].weight < dist[i])
             {
@@ -100,10 +100,7 @@ void primsAlgorithm(Graph* graph, int source)
         }
     }
 
-    for(int i = 0; i < graph->vertices; i++)
-    {
-        printf("%d ", dist[i]);
-    }
+    printSolurion(graph, dist);
 }
 
 // Function that inserts a node into the graph
@@ -143,6 +140,48 @@ Graph* initializeGraph(int vertices)
     }
 
     return graph;
+}
+
+char* searching_name(Graph* graph, int index_of_searched_name)
+{   
+    int i, j, validation_index = 0;
+
+    // Irritating the graph only over the main diagonal
+    for(i = 0; i < graph->vertices; i++)
+    {
+        for(j = i; j < graph->vertices; j++)
+        {
+            if(graph->matrix[i][j].weight != 0) // If the weight is 0 then there is no node in matrix[i][j]
+            {
+                if(validation_index == index_of_searched_name)
+                {
+                    return graph->matrix[i][j].name;
+                }
+
+                // If the validation_index is not the searched one continue to the next one
+                validation_index++;
+            }
+        }
+    }
+    
+    // Returning NULL pointer in case there is no such index or empty array
+    return NULL; 
+}
+
+void printSolurion(Graph* graph, int dist[])
+{
+    for(int index = 0; index < graph->vertices; index++)
+    {
+        if(index != graph->vertices - 1)
+        {
+            printf("%s(%d)->", 
+                searching_name(graph, index), dist[index]);
+            continue;
+        }    
+
+        printf("%s(%d)", 
+            searching_name(graph, index), dist[index]);
+    }
 }
 
 void freeGraph(Graph* graph)

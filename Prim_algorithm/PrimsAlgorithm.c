@@ -91,7 +91,7 @@ void primsAlgorithm(Graph* graph, int source)
         // Update the distance value of the neighboring vertices of the picked vertex.
         for(int i = 0; i < graph->vertices; i++)
         {
-            if (!visited[i] && 
+            if(!visited[i] && 
                 graph->matrix[minDist][i].weight && 
                 graph->matrix[minDist][i].weight < dist[i])
             {

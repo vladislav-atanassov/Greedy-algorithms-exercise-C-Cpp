@@ -51,6 +51,9 @@ int coinChangeProblem(int coins[], const int size, int wantedNumber)
     return -1;
 }
 
+/*
+Example array
+
 int main()
 {
     int coins[5] = {1, 7, 4, 5, 3};
@@ -61,3 +64,4 @@ int main()
 
     return 0;
 }
+*/

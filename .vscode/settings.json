@@ -59,6 +59,7 @@
   "files.associations": {
     "stdio.h": "c",
     "primsalgorithm.h": "c",
-    "dynamic_graph_creation.h": "c"
+    "dynamic_graph_creation.h": "c",
+    "kruskalalgorithm.h": "c"
   }
 }

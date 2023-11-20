@@ -1,0 +1,1 @@
+https://github.com/OpenGenus/cosmos/blob/master/code/greedy_algorithms/src/kruskal_minimum_spanning_tree/kruskal.c

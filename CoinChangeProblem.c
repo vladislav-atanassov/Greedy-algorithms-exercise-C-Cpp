@@ -28,7 +28,7 @@ int coinChangeProblem(int coins[], const int size, int wantedNumber)
 
     for(int i = 0; i < size; i++)
     {
-        if((int)(wantedNumber / coins[i]) > 0) // Check if the current coin
+        if((wantedNumber / coins[i]) > 0) // Check if the current coin fits
         {
             int amountOfFills = wantedNumber / coins[i];
 
@@ -52,7 +52,7 @@ int coinChangeProblem(int coins[], const int size, int wantedNumber)
 }
 
 /*
-Example array
+//Example array
 
 int main()
 {

@@ -3,55 +3,55 @@
 
 #include <limits.h>
 
-#define MAX_CODE_LENGTH SCHAR_MAX
+#define MAX_CODE_LENGTH UCHAR_MAX + 1
 #define NULL_CHAR '\0'
 
 // Node structure for the Huffman tree
-struct Node 
+typedef struct Node 
 {
     char data;
     int frequency;
     struct Node *left, *right;
-};
+} Node;
 
 // Structure for a priority queue node
-struct PriorityQueueNode
+typedef struct PriorityQueueNode
 {
     struct Node *node;
     struct PriorityQueueNode *next;
-};
+} PriorityQueueNode;
 
 // Structure for a priority queue
-struct PriorityQueue 
+typedef struct PriorityQueue 
 {
     struct PriorityQueueNode *front;
-};
+} PriorityQueue;
 
 // Function to create a new node
-struct Node* createNode(char data, int frequency);
+Node* createNode(char data, int frequency);
 
 // Function to create a new priority queue node
-struct PriorityQueueNode* createPriorityQueueNode(struct Node* node);
+PriorityQueueNode* createPriorityQueueNode(Node* node);
 
 // Function to create a new priority queue
-struct PriorityQueue* createPriorityQueue();
+PriorityQueue* createPriorityQueue();
 
 // Function to push a node into the priority queue
-void push(struct PriorityQueue* priorityQueue, struct Node* node);
+void push(PriorityQueue* priorityQueue, Node* node);
 
 // Function to pop the front node from the priority queue
-struct Node* pop(struct PriorityQueue* priorityQueue);
+Node* pop(PriorityQueue* priorityQueue);
 
 // Function to build the Huffman tree
-struct Node* buildHuffmanTree(char data[], int frequency[], int size_of_data);
+Node* buildHuffmanTree(char data[], int frequency[], int size_of_data);
 
 // Function to encode characters using the Huffman tree
-void encode(struct Node* root, char str[], int top, char data[], char huffmanCodes[][MAX_CODE_LENGTH]);
+void encode(Node* root, char str[], int top, char data[], char huffmanCodes[][MAX_CODE_LENGTH]);
 
 // Function to decode the encoded string using the Huffman tree
-void decode(struct Node* root, char encodedStr[]);
+void decode(Node* root, char encodedStr[]);
 
 // Function to free the allocated memory
-void freeTree(struct Node* root);
+void freeTree(Node* root);
 
 #endif

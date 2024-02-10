@@ -77,14 +77,13 @@ void KruskalMST(Graph* graph)
 	// Step 1: Sort all the edges in non-decreasing order of their weight
 	// If we are not allowed to change the given graph, we can create a copy of
 	// array of edges
-	qsort(graph->edge, 
-        graph->numberOfEdges, sizeof(graph->edge[0]), myComp);
+	qsort(graph->edge, (size_t)graph->numberOfEdges, sizeof(graph->edge[0]), myComp);
 
 	// Allocate memory for creating vertices subsets
 	Subset *subsets = (Subset*)malloc((size_t)vertices * sizeof(Subset));
 
 	// Create vertices subsets with single elements
-	for(int i = 0; i < vertices; i++)
+	for(i = 0; i < vertices; i++)
 	{
 		subsets[i].parent = i;
 		subsets[i].rank = 0;

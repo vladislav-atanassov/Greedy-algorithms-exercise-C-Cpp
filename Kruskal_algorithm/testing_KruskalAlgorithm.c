@@ -8,14 +8,16 @@ int main()
 	/* Let us create following weighted graph
 			10
 		0--------1
-		| \	 |
-	6| 5\ |15
-		|	 \ |
+		| \	     |
+	    6    5   15
+		|	   \ |
 		2--------3
-			4	 */
+			4	 
+	*/
+
 	int vertices = 4; // Number of vertices in graph
 	int numberOfEdges = 5; // Number of edges in graph
-	struct Graph* graph = createGraph(vertices, numberOfEdges);
+	Graph* graph = createGraph(vertices, numberOfEdges);
 
 	// add edge 0-1
 	graph->edge[0].src = 0;

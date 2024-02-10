@@ -5,9 +5,9 @@
 
 #include "HuffmansCoding.h"
 
-struct Node* createNode(char data, int frequency) 
+Node* createNode(char data, int frequency) 
 {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    Node* newNode = (Node*)malloc(sizeof(Node));
 
     if(!newNode)
     {
@@ -22,9 +22,9 @@ struct Node* createNode(char data, int frequency)
     return newNode;
 }
 
-struct PriorityQueueNode* createPriorityQueueNode(struct Node* node) 
+PriorityQueueNode* createPriorityQueueNode(Node* node) 
 {
-    struct PriorityQueueNode* newQueue = (struct PriorityQueueNode*)malloc(sizeof(struct PriorityQueueNode));
+    PriorityQueueNode* newQueue = (PriorityQueueNode*)malloc(sizeof(PriorityQueueNode));
 
     if(!newQueue)
     {
@@ -38,9 +38,9 @@ struct PriorityQueueNode* createPriorityQueueNode(struct Node* node)
     return newQueue;
 }
 
-struct PriorityQueue* createPriorityQueue() 
+PriorityQueue* createPriorityQueue() 
 {
-    struct PriorityQueue* priorityQueue = (struct PriorityQueue*)malloc(sizeof(struct PriorityQueue));
+    PriorityQueue* priorityQueue = (PriorityQueue*)malloc(sizeof(PriorityQueue));
 
     if(!priorityQueue)
     {
@@ -53,9 +53,9 @@ struct PriorityQueue* createPriorityQueue()
     return priorityQueue;
 }
 
-void push(struct PriorityQueue* priorityQueue, struct Node* node) 
+void push(PriorityQueue* priorityQueue, Node* node) 
 {
-    struct PriorityQueueNode* newNode = createPriorityQueueNode(node);
+    PriorityQueueNode* newNode = createPriorityQueueNode(node);
 
     // If the queue is empty or the new node has a lower frequency
     if(priorityQueue->front == NULL || node->frequency < priorityQueue->front->node->frequency)
@@ -66,7 +66,7 @@ void push(struct PriorityQueue* priorityQueue, struct Node* node)
     else 
     {
         // Find the correct position to insert the new node
-        struct PriorityQueueNode* temp = priorityQueue->front;
+        PriorityQueueNode* temp = priorityQueue->front;
         while(temp->next != NULL && temp->next->node->frequency < node->frequency) 
         {
             temp = temp->next;
@@ -78,25 +78,25 @@ void push(struct PriorityQueue* priorityQueue, struct Node* node)
     }
 }
 
-struct Node* pop(struct PriorityQueue* priorityQueue) 
+Node* pop(PriorityQueue* priorityQueue) 
 {
     if(!priorityQueue->front) 
     {
         return NULL;
     }
 
-    struct Node* frontNode = priorityQueue->front->node;
-    struct PriorityQueueNode* temp = priorityQueue->front;
+    Node* frontNode = priorityQueue->front->node;
+    PriorityQueueNode* temp = priorityQueue->front;
     priorityQueue->front = priorityQueue->front->next;
 
     free(temp);
     return frontNode;
 }
 
-struct Node* buildHuffmanTree(char data[], int frequency[], int size_of_data) 
+Node* buildHuffmanTree(char data[], int frequency[], int size_of_data) 
 {
-    struct Node *left, *right, *top;
-    struct PriorityQueue* priorityQueue = createPriorityQueue();
+    Node *left, *right, *top;
+    PriorityQueue* priorityQueue = createPriorityQueue();
 
     // Create a leaf node for each character and push it into the priority queue
     for(int i = 0; i < size_of_data; ++i) 
@@ -120,7 +120,7 @@ struct Node* buildHuffmanTree(char data[], int frequency[], int size_of_data)
     return pop(priorityQueue);
 }
 
-void encode(struct Node* root, char str[], int top, char data[], char huffmanCodes[][MAX_CODE_LENGTH]) 
+void encode(Node* root, char str[], int top, char data[], char huffmanCodes[][MAX_CODE_LENGTH]) 
 {
     if(!root)
     {
@@ -145,9 +145,9 @@ void encode(struct Node* root, char str[], int top, char data[], char huffmanCod
 }
 
 // Function to decode the encoded string using the Huffman tree
-void decode(struct Node* root, char encodedStr[]) 
+void decode(Node* root, char encodedStr[]) 
 {
-    struct Node* current = root;
+    Node* current = root;
 
     printf("Decoded String: ");
     for(int i = 0; encodedStr[i] != NULL_CHAR; ++i) 
@@ -171,7 +171,7 @@ void decode(struct Node* root, char encodedStr[])
     printf("\n");
 }
 
-void freeTree(struct Node* root) 
+void freeTree(Node* root) 
 {
     if(!root) 
     {

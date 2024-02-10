@@ -47,7 +47,7 @@ Graph* initializeGraph(int vertices);
 
 char* searching_name(Graph* graph, int index_of_searched_name);
 
-void printSolurion(Graph* graph, int dist[]);
+void printSolution(Graph* graph, int dist[]);
 
 void freeGraph(Graph* graph);
 

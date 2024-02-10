@@ -9,7 +9,7 @@ int main()
     int frequency[] = {5, 9, 12, 13, 16, 45};
     int size_of_data = sizeof(data) / sizeof(data[0]);
 
-    struct Node* root = buildHuffmanTree(data, frequency, size_of_data);
+    Node* root = buildHuffmanTree(data, frequency, size_of_data);
 
     char str[MAX_CODE_LENGTH] = {0};
     char huffmanCodes[UCHAR_MAX][MAX_CODE_LENGTH];
@@ -25,8 +25,7 @@ int main()
                 huffmanCodes[index][0] == NULL_CHAR ? "Not Found" : huffmanCodes[index]);
     }
 
-    // Example of decoding a string
-    char encodedString[] = "111111111100"; // Replace this with your actual encoded string
+    char encodedString[] = "11011000";
     decode(root, encodedString);
     
     freeTree(root);

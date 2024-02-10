@@ -100,7 +100,7 @@ void primsAlgorithm(Graph* graph, int source)
         }
     }
 
-    printSolurion(graph, dist);
+    printSolution(graph, dist);
 }
 
 // Function that inserts a node into the graph
@@ -168,7 +168,7 @@ char* searching_name(Graph* graph, int index_of_searched_name)
     return NULL; 
 }
 
-void printSolurion(Graph* graph, int dist[])
+void printSolution(Graph* graph, int dist[])
 {
     for(int index = 0; index < graph->vertices; index++)
     {
